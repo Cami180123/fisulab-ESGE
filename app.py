@@ -365,381 +365,385 @@ with col_detalle:
 
         # ── TAB 2: Clínico ────────────────────────────────────────
         with tab2:
-            ca,cb = st.columns(2)
-            with ca:
-                st.markdown('<div class="sh b">📋 Consulta</div><div class="sb">',
-                            unsafe_allow_html=True)
-                for lbl,campo in [
-                    ("Especialidad","Especialidad"),("Profesional","Profesional Tratante"),
-                    ("Sede","Sede Fisulab"),("Tipo consulta","Tipo Consulta"),
-                    ("Motivo","Motivo Consulta"),("Etapa protocolo","Etapa Protocolo LPH"),
-                ]:
-                    val=v(p,campo); e="e" if val=="—" else ""
-                    st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+            with st.container(height=550, border=False):
+                ca,cb = st.columns(2)
+                with ca:
+                    st.markdown('<div class="sh b">📋 Consulta</div><div class="sb">',
                                 unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-            with cb:
-                st.markdown('<div class="sh n">🦷 Diagnóstico</div><div class="sb">',
-                            unsafe_allow_html=True)
-                for lbl,campo in [
-                    ("Diagnóstico principal (CIE-10)","Diagnóstico Principal (CIE-10)"),
-                    ("Diagnóstico secundario","Dx Secundario"),
-                    ("Tipo diagnóstico","Tipo Diagnóstico"),
-                    ("Hallazgo genético","Hallazgo Genético"),
-                ]:
-                    val=v(p,campo); e="e" if val=="—" else ""
-                    st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
-                                unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-            st.markdown('<div class="sh c">🔬 Hallazgos por Especialidad</div><div class="sb">',
-                        unsafe_allow_html=True)
-            ce1,ce2,ce3 = st.columns(3)
-            campos_esp = [
-                ("Higiene oral","Higiene Oral"),("Oclusión","Oclusión LPH"),
-                ("Piezas afectadas","Piezas Afectadas"),("Tipo parto","Tipo Parto"),
-                ("Semanas gestación","Sem. Gestación"),("Peso nacer (g)","Peso Nacer g"),
-                ("APGAR","APGAR"),("Lactancia","Lactancia"),("Esquema vac.","Esquema Vac."),
-                ("Eval. habla","Evaluación Habla"),("Eval. deglución","Evaluación Deglución"),
-                ("Eval. auditiva","Evaluación Auditiva"),("Enfoque terapéutico","Enfoque Terapéutico"),
-                ("Riesgo suicida","Riesgo Suicida"),("Frec. sesiones","Frecuencia Sesiones"),
-            ]
-            alguno = False
-            for i,(lbl,campo) in enumerate(campos_esp):
-                val=v(p,campo)
-                if val!="—":
-                    alguno=True
-                    with [ce1,ce2,ce3][i%3]:
-                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv">{val}</div>',
+                    for lbl,campo in [
+                        ("Especialidad","Especialidad"),("Profesional","Profesional Tratante"),
+                        ("Sede","Sede Fisulab"),("Tipo consulta","Tipo Consulta"),
+                        ("Motivo","Motivo Consulta"),("Etapa protocolo","Etapa Protocolo LPH"),
+                    ]:
+                        val=v(p,campo); e="e" if val=="—" else ""
+                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
                                     unsafe_allow_html=True)
-            if not alguno:
-                st.markdown('<div class="dv e">No aplica para esta especialidad</div>',
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with cb:
+                    st.markdown('<div class="sh n">🦷 Diagnóstico</div><div class="sb">',
+                                unsafe_allow_html=True)
+                    for lbl,campo in [
+                        ("Diagnóstico principal (CIE-10)","Diagnóstico Principal (CIE-10)"),
+                        ("Diagnóstico secundario","Dx Secundario"),
+                        ("Tipo diagnóstico","Tipo Diagnóstico"),
+                        ("Hallazgo genético","Hallazgo Genético"),
+                    ]:
+                        val=v(p,campo); e="e" if val=="—" else ""
+                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                                    unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+    
+                st.markdown('<div class="sh c">🔬 Hallazgos por Especialidad</div><div class="sb">',
                             unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
+                ce1,ce2,ce3 = st.columns(3)
+                campos_esp = [
+                    ("Higiene oral","Higiene Oral"),("Oclusión","Oclusión LPH"),
+                    ("Piezas afectadas","Piezas Afectadas"),("Tipo parto","Tipo Parto"),
+                    ("Semanas gestación","Sem. Gestación"),("Peso nacer (g)","Peso Nacer g"),
+                    ("APGAR","APGAR"),("Lactancia","Lactancia"),("Esquema vac.","Esquema Vac."),
+                    ("Eval. habla","Evaluación Habla"),("Eval. deglución","Evaluación Deglución"),
+                    ("Eval. auditiva","Evaluación Auditiva"),("Enfoque terapéutico","Enfoque Terapéutico"),
+                    ("Riesgo suicida","Riesgo Suicida"),("Frec. sesiones","Frecuencia Sesiones"),
+                ]
+                alguno = False
+                for i,(lbl,campo) in enumerate(campos_esp):
+                    val=v(p,campo)
+                    if val!="—":
+                        alguno=True
+                        with [ce1,ce2,ce3][i%3]:
+                            st.markdown(f'<div class="dl">{lbl}</div><div class="dv">{val}</div>',
+                                        unsafe_allow_html=True)
+                if not alguno:
+                    st.markdown('<div class="dv e">No aplica para esta especialidad</div>',
+                                unsafe_allow_html=True)
+                st.markdown("</div>", unsafe_allow_html=True)
 
         # ── TAB 3: Tratamiento ────────────────────────────────────
         with tab3:
-            ca,cb = st.columns(2)
-            with ca:
-                st.markdown('<div class="sh b">💊 Medicamentos</div><div class="sb">',
-                            unsafe_allow_html=True)
-                meds_raw=v(p,"Medicamentos")
-                if meds_raw!="—":
-                    for med in meds_raw.split("|"):
-                        med=med.strip()
-                        if med:
-                            st.markdown(f'<div style="background:#f0f4ff;border-left:3px solid #0B3D91;padding:7px 10px;border-radius:4px;margin-bottom:6px;font-size:12px">💊 {med}</div>',
-                                        unsafe_allow_html=True)
-                else:
-                    st.markdown('<div class="dv e">Sin medicamentos</div>',
+            with st.container(height=550, border=False):
+                ca,cb = st.columns(2)
+                with ca:
+                    st.markdown('<div class="sh b">💊 Medicamentos</div><div class="sb">',
                                 unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-                st.markdown('<div class="sh v">🔧 Procedimiento</div><div class="sb">',
-                            unsafe_allow_html=True)
-                proc=v(p,"Procedimiento Realizado"); e="e" if proc=="—" else ""
-                st.markdown(f'<div class="dv {e}">🩺 {proc}</div>', unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-            with cb:
-                st.markdown('<div class="sh m">🧪 Exámenes</div><div class="sb">',
-                            unsafe_allow_html=True)
-                for lbl,campo in [("Laboratorios","Laboratorios"),
-                                   ("Imagen / Estudio","Imagen / Estudio")]:
-                    val=v(p,campo); e="e" if val=="—" else ""
-                    st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                    meds_raw=v(p,"Medicamentos")
+                    if meds_raw!="—":
+                        for med in meds_raw.split("|"):
+                            med=med.strip()
+                            if med:
+                                st.markdown(f'<div style="background:#f0f4ff;border-left:3px solid #0B3D91;padding:7px 10px;border-radius:4px;margin-bottom:6px;font-size:12px">💊 {med}</div>',
+                                            unsafe_allow_html=True)
+                    else:
+                        st.markdown('<div class="dv e">Sin medicamentos</div>',
+                                    unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+    
+                    st.markdown('<div class="sh v">🔧 Procedimiento</div><div class="sb">',
                                 unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-                st.markdown('<div class="sh n">📝 Recomendaciones</div><div class="sb">',
-                            unsafe_allow_html=True)
-                rec=v(p,"Recomendaciones"); e="e" if rec=="—" else ""
-                st.markdown(f'<div class="dv {e}" style="line-height:1.6">{rec}</div>',
-                            unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-                st.markdown('<div class="sh g">🗒️ Observaciones</div><div class="sb">',
-                            unsafe_allow_html=True)
-                obs=v(p,"Observaciones"); e="e" if obs=="—" else ""
-                st.markdown(f'<div class="dv {e}" style="line-height:1.6">{obs}</div>',
-                            unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
+                    proc=v(p,"Procedimiento Realizado"); e="e" if proc=="—" else ""
+                    st.markdown(f'<div class="dv {e}">🩺 {proc}</div>', unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+    
+                with cb:
+                    st.markdown('<div class="sh m">🧪 Exámenes</div><div class="sb">',
+                                unsafe_allow_html=True)
+                    for lbl,campo in [("Laboratorios","Laboratorios"),
+                                       ("Imagen / Estudio","Imagen / Estudio")]:
+                        val=v(p,campo); e="e" if val=="—" else ""
+                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                                    unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+    
+                    st.markdown('<div class="sh n">📝 Recomendaciones</div><div class="sb">',
+                                unsafe_allow_html=True)
+                    rec=v(p,"Recomendaciones"); e="e" if rec=="—" else ""
+                    st.markdown(f'<div class="dv {e}" style="line-height:1.6">{rec}</div>',
+                                unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+    
+                    st.markdown('<div class="sh g">🗒️ Observaciones</div><div class="sb">',
+                                unsafe_allow_html=True)
+                    obs=v(p,"Observaciones"); e="e" if obs=="—" else ""
+                    st.markdown(f'<div class="dv {e}" style="line-height:1.6">{obs}</div>',
+                                unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
 
         # ── TAB 4: Signos Vitales ─────────────────────────────────
         with tab4:
-            # Fecha y hora de última toma de signos vitales
-            if not h.empty:
-                ultima = h.iloc[-1]
-                fecha_sv = str(ultima.get("Fecha","")).strip()
-                hora_sv  = str(ultima.get("Hora","")).strip()
-                st.markdown(f"""
-                <div style="background:#E8F5E9;border-radius:8px;padding:8px 14px;
-                            margin-bottom:12px;font-size:13px;border-left:4px solid #1A7A3C">
-                    🕐 <strong>Últimos signos vitales registrados:</strong>
-                    {fecha_sv} a las {hora_sv}
-                </div>""", unsafe_allow_html=True)
-
-            sv1,sv2 = st.columns(2)
-            sv_c = [
-                ("Peso (kg)","Peso kg"),("Talla (cm)","Talla cm"),
-                ("IMC","IMC"),("Perímetro cefálico","PC cm"),
-                ("Presión arterial","TA mmHg"),("FC (lpm)","FC lpm"),
-                ("FR (rpm)","FR rpm"),("Temperatura (°C)","Temp °C"),
-                ("SatO₂ (%)","SatO₂ %"),("Estado general","Estado General"),
-            ]
-            hay=False
-            for i,(lbl,campo) in enumerate(sv_c):
-                val=v(p,campo)
-                if val!="—":
-                    hay=True; cc="v" if i%2==0 else ""
-                    with (sv1 if i%2==0 else sv2):
-                        st.markdown(f'<div class="mc {cc}"><div class="mc-lbl">{lbl}</div><div class="mc-val {cc}" style="font-size:16px">{val}</div></div>',
-                                    unsafe_allow_html=True)
-            if not hay:
-                st.info("Sin signos vitales registrados.")
-
-            # Radar de signos vitales
-            if hay:
-                sv_num={}
-                for lbl,campo in [("FC","FC lpm"),("FR","FR rpm"),
-                                   ("Temp","Temp °C"),("SatO₂","SatO₂ %")]:
-                    try: sv_num[lbl]=float(str(p.get(campo,"")).strip())
-                    except: pass
-                if len(sv_num)>=3:
-                    st.markdown("**📡 Radar de signos vitales** *(valores numéricos de la última consulta)*")
-                    fig=go.Figure()
-                    fig.add_trace(go.Scatterpolar(
-                        r=list(sv_num.values()), theta=list(sv_num.keys()),
-                        fill='toself', fillcolor='rgba(11,61,145,0.12)',
-                        line=dict(color='#0B3D91',width=2), name="Signos vitales"
-                    ))
-                    fig.update_layout(
-                        polar=dict(radialaxis=dict(visible=True,color="#444",
-                                                   tickfont=dict(color="#444"))),
-                        showlegend=False, height=280,
-                        margin=dict(l=40,r=40,t=20,b=20),
-                        paper_bgcolor='rgba(0,0,0,0)',
-                        font=dict(color="#222")
-                    )
-                    st.plotly_chart(fig, use_container_width=True)
+            with st.container(height=550, border=False):
+                # Fecha y hora de última toma de signos vitales
+                if not h.empty:
+                    ultima = h.iloc[-1]
+                    fecha_sv = str(ultima.get("Fecha","")).strip()
+                    hora_sv  = str(ultima.get("Hora","")).strip()
+                    st.markdown(f"""
+                    <div style="background:#E8F5E9;border-radius:8px;padding:8px 14px;
+                                margin-bottom:12px;font-size:13px;border-left:4px solid #1A7A3C">
+                        🕐 <strong>Últimos signos vitales registrados:</strong>
+                        {fecha_sv} a las {hora_sv}
+                    </div>""", unsafe_allow_html=True)
+    
+                sv1,sv2 = st.columns(2)
+                sv_c = [
+                    ("Peso (kg)","Peso kg"),("Talla (cm)","Talla cm"),
+                    ("IMC","IMC"),("Perímetro cefálico","PC cm"),
+                    ("Presión arterial","TA mmHg"),("FC (lpm)","FC lpm"),
+                    ("FR (rpm)","FR rpm"),("Temperatura (°C)","Temp °C"),
+                    ("SatO₂ (%)","SatO₂ %"),("Estado general","Estado General"),
+                ]
+                hay=False
+                for i,(lbl,campo) in enumerate(sv_c):
+                    val=v(p,campo)
+                    if val!="—":
+                        hay=True; cc="v" if i%2==0 else ""
+                        with (sv1 if i%2==0 else sv2):
+                            st.markdown(f'<div class="mc {cc}"><div class="mc-lbl">{lbl}</div><div class="mc-val {cc}" style="font-size:16px">{val}</div></div>',
+                                        unsafe_allow_html=True)
+                if not hay:
+                    st.info("Sin signos vitales registrados.")
+    
+                # Radar de signos vitales
+                if hay:
+                    sv_num={}
+                    for lbl,campo in [("FC","FC lpm"),("FR","FR rpm"),
+                                       ("Temp","Temp °C"),("SatO₂","SatO₂ %")]:
+                        try: sv_num[lbl]=float(str(p.get(campo,"")).strip())
+                        except: pass
+                    if len(sv_num)>=3:
+                        st.markdown("**📡 Radar de signos vitales** *(valores numéricos de la última consulta)*")
+                        fig=go.Figure()
+                        fig.add_trace(go.Scatterpolar(
+                            r=list(sv_num.values()), theta=list(sv_num.keys()),
+                            fill='toself', fillcolor='rgba(11,61,145,0.12)',
+                            line=dict(color='#0B3D91',width=2), name="Signos vitales"
+                        ))
+                        fig.update_layout(
+                            polar=dict(radialaxis=dict(visible=True,color="#444",
+                                                       tickfont=dict(color="#444"))),
+                            showlegend=False, height=280,
+                            margin=dict(l=40,r=40,t=20,b=20),
+                            paper_bgcolor='rgba(0,0,0,0)',
+                            font=dict(color="#222")
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
 
         # ── TAB 5: Evolución ──────────────────────────────────────
         with tab5:
-            if h.empty:
-                st.info("No hay historial de consultas disponible para este paciente.")
-            else:
-                n_cons = len(h)
-                esp_pac = v(p, "Especialidad")
-
-                # ── Resumen rápido ────────────────────────────────
-                r1,r2,r3 = st.columns(3)
-                with r1:
-                    st.markdown(f'<div class="mc"><div class="mc-lbl">Total consultas</div><div class="mc-val">{n_cons}</div></div>',
-                                unsafe_allow_html=True)
-                with r2:
-                    primera = str(h.iloc[0]["Fecha"]) if not h.empty else "—"
-                    st.markdown(f'<div class="mc v"><div class="mc-lbl">Primera consulta</div><div class="mc-val v" style="font-size:13px">{primera}</div></div>',
-                                unsafe_allow_html=True)
-                with r3:
-                    ultima_f = str(h.iloc[-1]["Fecha"]) if not h.empty else "—"
-                    st.markdown(f'<div class="mc n"><div class="mc-lbl">Última consulta</div><div class="mc-val n" style="font-size:13px">{ultima_f}</div></div>',
-                                unsafe_allow_html=True)
-
-                st.markdown("---")
-
-                # ── Gráfica de peso a lo largo del tiempo ────────
-                h_peso = h[h["Peso kg"] != ""].copy()
-                try:
-                    h_peso["Peso_num"] = pd.to_numeric(h_peso["Peso kg"], errors="coerce")
-                    h_peso = h_peso.dropna(subset=["Peso_num","Fecha_dt"])
-                    if len(h_peso) >= 2:
-                        st.markdown("#### ⚖️ Evolución del peso")
-                        fig_peso = px.line(
-                            h_peso, x="Fecha_dt", y="Peso_num",
-                            markers=True,
-                            labels={"Fecha_dt":"Fecha","Peso_num":"Peso (kg)"},
-                            color_discrete_sequence=["#0B3D91"]
-                        )
-                        fig_peso.update_traces(line=dict(width=3), marker=dict(size=8))
-                        fig_peso.update_layout(
-                            height=260, margin=dict(l=10,r=10,t=10,b=10),
-                            paper_bgcolor="rgba(0,0,0,0)",
-                            plot_bgcolor="rgba(0,0,0,0)",
-                            xaxis=dict(showgrid=True,gridcolor="#eee",
-                                       tickfont=dict(color="#333")),
-                            yaxis=dict(showgrid=True,gridcolor="#eee",
-                                       tickfont=dict(color="#333")),
-                            font=dict(color="#222")
-                        )
-                        st.plotly_chart(fig_peso, use_container_width=True)
-                except: pass
-
-                # ── Gráfica de signos vitales (FC y Temp) ─────────
-                try:
-                    h_sv = h.copy()
-                    h_sv["FC_num"]   = pd.to_numeric(h_sv["FC lpm"],  errors="coerce")
-                    h_sv["Temp_num"] = pd.to_numeric(h_sv["Temp C"],  errors="coerce")
-                    h_sv["Sat_num"]  = pd.to_numeric(h_sv["SatO2 pct"], errors="coerce")
-                    h_sv = h_sv.dropna(subset=["Fecha_dt"])
-
-                    sv_ok = h_sv[h_sv["FC_num"].notna() | h_sv["Temp_num"].notna()]
-                    if len(sv_ok) >= 2:
-                        st.markdown("#### 💓 Signos vitales a lo largo del tiempo")
-                        fig_sv = go.Figure()
-                        if h_sv["FC_num"].notna().sum() >= 2:
-                            fig_sv.add_trace(go.Scatter(
-                                x=h_sv["Fecha_dt"], y=h_sv["FC_num"],
-                                name="FC (lpm)", mode="lines+markers",
-                                line=dict(color="#0B3D91",width=2),
-                                marker=dict(size=7)
-                            ))
-                        if h_sv["Temp_num"].notna().sum() >= 2:
-                            fig_sv.add_trace(go.Scatter(
-                                x=h_sv["Fecha_dt"], y=h_sv["Temp_num"],
-                                name="Temp (°C)", mode="lines+markers",
-                                line=dict(color="#BF360C",width=2,dash="dot"),
-                                marker=dict(size=7), yaxis="y2"
-                            ))
-                        if h_sv["Sat_num"].notna().sum() >= 2:
-                            fig_sv.add_trace(go.Scatter(
-                                x=h_sv["Fecha_dt"], y=h_sv["Sat_num"],
-                                name="SatO₂ (%)", mode="lines+markers",
-                                line=dict(color="#1A7A3C",width=2,dash="dash"),
-                                marker=dict(size=7), yaxis="y3"
-                            ))
-                        fig_sv.update_layout(
-                            height=300, margin=dict(l=10,r=80,t=10,b=10),
-                            paper_bgcolor="rgba(0,0,0,0)",
-                            plot_bgcolor="rgba(0,0,0,0)",
-                            legend=dict(orientation="h",y=-0.2,font=dict(color="#222")),
-                            xaxis=dict(showgrid=True,gridcolor="#eee",
-                                       tickfont=dict(color="#333")),
-                            yaxis=dict(showgrid=True,gridcolor="#eee",
-                                       tickfont=dict(color="#333"),title="FC"),
-                            yaxis2=dict(overlaying="y",side="right",
-                                        tickfont=dict(color="#BF360C"),title="Temp"),
-                            yaxis3=dict(overlaying="y",side="right",position=0.95,
-                                        tickfont=dict(color="#1A7A3C")),
-                            font=dict(color="#222")
-                        )
-                        st.plotly_chart(fig_sv, use_container_width=True)
-                except: pass
-
-                # ── Gráfica progresión especialidad específica ────
-                try:
-                    if esp_pac in ["Odontología","Odontopediatría","Ortodoncia"]:
-                        h_hig = h[h["Higiene Oral"] != ""].copy()
-                        if len(h_hig) >= 2:
-                            orden = {"Mala":1,"Regular":2,"Buena":3}
-                            h_hig["Hig_num"] = h_hig["Higiene Oral"].map(orden)
-                            h_hig = h_hig.dropna(subset=["Hig_num","Fecha_dt"])
-                            st.markdown("#### 🦷 Evolución de higiene oral")
-                            fig_hig = px.line(
-                                h_hig, x="Fecha_dt", y="Hig_num",
+            with st.container(height=550, border=False):
+                if h.empty:
+                    st.info("No hay historial de consultas disponible para este paciente.")
+                else:
+                    n_cons = len(h)
+                    esp_pac = v(p, "Especialidad")
+    
+                    # ── Resumen rápido ────────────────────────────────
+                    r1,r2,r3 = st.columns(3)
+                    with r1:
+                        st.markdown(f'<div class="mc"><div class="mc-lbl">Total consultas</div><div class="mc-val">{n_cons}</div></div>',
+                                    unsafe_allow_html=True)
+                    with r2:
+                        primera = str(h.iloc[0]["Fecha"]) if not h.empty else "—"
+                        st.markdown(f'<div class="mc v"><div class="mc-lbl">Primera consulta</div><div class="mc-val v" style="font-size:13px">{primera}</div></div>',
+                                    unsafe_allow_html=True)
+                    with r3:
+                        ultima_f = str(h.iloc[-1]["Fecha"]) if not h.empty else "—"
+                        st.markdown(f'<div class="mc n"><div class="mc-lbl">Última consulta</div><div class="mc-val n" style="font-size:13px">{ultima_f}</div></div>',
+                                    unsafe_allow_html=True)
+    
+                    st.markdown("---")
+    
+                    # ── Gráfica de peso a lo largo del tiempo ────────
+                    h_peso = h[h["Peso kg"] != ""].copy()
+                    try:
+                        h_peso["Peso_num"] = pd.to_numeric(h_peso["Peso kg"], errors="coerce")
+                        h_peso = h_peso.dropna(subset=["Peso_num","Fecha_dt"])
+                        if len(h_peso) >= 2:
+                            st.markdown("#### ⚖️ Evolución del peso")
+                            fig_peso = px.line(
+                                h_peso, x="Fecha_dt", y="Peso_num",
                                 markers=True,
-                                labels={"Fecha_dt":"Fecha","Hig_num":"Nivel"},
-                                color_discrete_sequence=["#1A7A3C"]
+                                labels={"Fecha_dt":"Fecha","Peso_num":"Peso (kg)"},
+                                color_discrete_sequence=["#0B3D91"]
                             )
-                            fig_hig.update_traces(line=dict(width=3), marker=dict(size=8))
-                            fig_hig.update_layout(
-                                height=220, margin=dict(l=10,r=10,t=10,b=10),
+                            fig_peso.update_traces(line=dict(width=3), marker=dict(size=8))
+                            fig_peso.update_layout(
+                                height=260, margin=dict(l=10,r=10,t=10,b=10),
                                 paper_bgcolor="rgba(0,0,0,0)",
                                 plot_bgcolor="rgba(0,0,0,0)",
-                                yaxis=dict(tickvals=[1,2,3],
-                                           ticktext=["Mala","Regular","Buena"],
+                                xaxis=dict(showgrid=True,gridcolor="#eee",
                                            tickfont=dict(color="#333")),
-                                xaxis=dict(tickfont=dict(color="#333")),
+                                yaxis=dict(showgrid=True,gridcolor="#eee",
+                                           tickfont=dict(color="#333")),
                                 font=dict(color="#222")
                             )
-                            st.plotly_chart(fig_hig, use_container_width=True)
-
-                    if esp_pac == "Fonoaudiología":
-                        h_hab = h[h["Estado Habla"] != ""].copy()
-                        if len(h_hab) >= 2:
-                            orden = {"Severa":1,"Moderada":2,"Leve":3,
-                                     "Sin hipernasalidad":4}
-                            h_hab["Hab_num"] = h_hab["Estado Habla"].map(orden)
-                            h_hab = h_hab.dropna(subset=["Hab_num","Fecha_dt"])
-                            st.markdown("#### 🗣️ Evolución de hipernasalidad")
-                            fig_hab = px.line(
-                                h_hab, x="Fecha_dt", y="Hab_num",
-                                markers=True,
-                                labels={"Fecha_dt":"Fecha","Hab_num":"Nivel"},
-                                color_discrete_sequence=["#6A0DAD"]
-                            )
-                            fig_hab.update_traces(line=dict(width=3), marker=dict(size=8))
-                            fig_hab.update_layout(
-                                height=220, margin=dict(l=10,r=10,t=10,b=10),
+                            st.plotly_chart(fig_peso, use_container_width=True)
+                    except: pass
+    
+                    # ── Gráfica de signos vitales (FC y Temp) ─────────
+                    try:
+                        h_sv = h.copy()
+                        h_sv["FC_num"]   = pd.to_numeric(h_sv["FC lpm"],  errors="coerce")
+                        h_sv["Temp_num"] = pd.to_numeric(h_sv["Temp C"],  errors="coerce")
+                        h_sv["Sat_num"]  = pd.to_numeric(h_sv["SatO2 pct"], errors="coerce")
+                        h_sv = h_sv.dropna(subset=["Fecha_dt"])
+    
+                        sv_ok = h_sv[h_sv["FC_num"].notna() | h_sv["Temp_num"].notna()]
+                        if len(sv_ok) >= 2:
+                            st.markdown("#### 💓 Signos vitales a lo largo del tiempo")
+                            fig_sv = go.Figure()
+                            if h_sv["FC_num"].notna().sum() >= 2:
+                                fig_sv.add_trace(go.Scatter(
+                                    x=h_sv["Fecha_dt"], y=h_sv["FC_num"],
+                                    name="FC (lpm)", mode="lines+markers",
+                                    line=dict(color="#0B3D91",width=2),
+                                    marker=dict(size=7)
+                                ))
+                            if h_sv["Temp_num"].notna().sum() >= 2:
+                                fig_sv.add_trace(go.Scatter(
+                                    x=h_sv["Fecha_dt"], y=h_sv["Temp_num"],
+                                    name="Temp (°C)", mode="lines+markers",
+                                    line=dict(color="#BF360C",width=2,dash="dot"),
+                                    marker=dict(size=7), yaxis="y2"
+                                ))
+                            if h_sv["Sat_num"].notna().sum() >= 2:
+                                fig_sv.add_trace(go.Scatter(
+                                    x=h_sv["Fecha_dt"], y=h_sv["Sat_num"],
+                                    name="SatO₂ (%)", mode="lines+markers",
+                                    line=dict(color="#1A7A3C",width=2,dash="dash"),
+                                    marker=dict(size=7), yaxis="y3"
+                                ))
+                            fig_sv.update_layout(
+                                height=300, margin=dict(l=10,r=80,t=10,b=10),
                                 paper_bgcolor="rgba(0,0,0,0)",
                                 plot_bgcolor="rgba(0,0,0,0)",
-                                yaxis=dict(tickvals=[1,2,3,4],
-                                           ticktext=["Severa","Moderada","Leve","Sin hipernasalidad"],
+                                legend=dict(orientation="h",y=-0.2,font=dict(color="#222")),
+                                xaxis=dict(showgrid=True,gridcolor="#eee",
                                            tickfont=dict(color="#333")),
-                                xaxis=dict(tickfont=dict(color="#333")),
+                                yaxis=dict(showgrid=True,gridcolor="#eee",
+                                           tickfont=dict(color="#333"),title="FC"),
+                                yaxis2=dict(overlaying="y",side="right",
+                                            tickfont=dict(color="#BF360C"),title="Temp"),
+                                yaxis3=dict(overlaying="y",side="right",position=0.95,
+                                            tickfont=dict(color="#1A7A3C")),
                                 font=dict(color="#222")
                             )
-                            st.plotly_chart(fig_hab, use_container_width=True)
-                except: pass
-
-                # ── Respuesta al tratamiento por consulta ─────────
-                try:
-                    h_resp = h[h["Respuesta Tx"] != ""].copy()
-                    if len(h_resp) >= 2:
-                        orden_r = {"Buena":3,"Regular":2,"No evaluada":1,
-                                   "Sin respuesta":0,"Deterioro":-1}
-                        h_resp["Resp_num"] = h_resp["Respuesta Tx"].map(orden_r)
-                        h_resp = h_resp.dropna(subset=["Resp_num","Fecha_dt"])
-                        st.markdown("#### ✅ Respuesta al tratamiento por consulta")
-                        colores_resp = {3:"#1A7A3C",2:"#E07B00",1:"#888",0:"#C62828",-1:"#7F0000"}
-                        bar_colors = [colores_resp.get(int(r),  "#888")
-                                      for r in h_resp["Resp_num"]]
-                        fig_resp = go.Figure(go.Bar(
-                            x=[str(f)[:10] for f in h_resp["Fecha_dt"]],
-                            y=h_resp["Resp_num"],
-                            marker_color=bar_colors,
-                            text=h_resp["Respuesta Tx"],
-                            textposition="outside",
-                            textfont=dict(color="#222", size=11),
-                        ))
-                        fig_resp.update_layout(
-                            height=240, margin=dict(l=10,r=10,t=10,b=30),
-                            paper_bgcolor="rgba(0,0,0,0)",
-                            plot_bgcolor="rgba(0,0,0,0)",
-                            yaxis=dict(tickvals=[-1,0,1,2,3],
-                                       ticktext=["Deterioro","Sin resp.","No eval.","Regular","Buena"],
-                                       showgrid=True, gridcolor="#eee",
-                                       tickfont=dict(color="#333")),
-                            xaxis=dict(tickfont=dict(color="#333")),
-                            font=dict(color="#222"), showlegend=False
-                        )
-                        st.plotly_chart(fig_resp, use_container_width=True)
-                except: pass
-
-                # ── Línea de tiempo de consultas ──────────────────
-                st.markdown("#### 📅 Línea de tiempo de consultas")
-                for _, row in h.iterrows():
-                    fecha_c = str(row.get("Fecha","")).strip()
-                    hora_c  = str(row.get("Hora","")).strip()
-                    tipo_c  = str(row.get("Tipo Consulta","")).strip()
-                    motivo  = str(row.get("Motivo","")).strip()
-                    proc_c  = str(row.get("Procedimiento","")).strip()
-                    evol_c  = str(row.get("Evolucion","")).strip()
-                    resp_c  = str(row.get("Respuesta Tx","")).strip()
-                    n_c     = str(row.get("N Consulta","")).strip()
-
-                    color_tl = {"Primera vez":"#0B3D91","Control":"#1A7A3C",
-                                "Postquirúrgico":"#E07B00","Urgencias":"#C62828"}.get(tipo_c,"#555")
-                    st.markdown(f"""
-                    <div class="tl">
-                        <div class="tdot" style="background:{color_tl}"></div>
-                        <div class="tbox">
-                            <div class="tdate">📅 {fecha_c} {f'· ⏰ {hora_c}' if hora_c else ''} · Consulta #{n_c}</div>
-                            <div class="ttit" style="color:{color_tl}">
-                                {tipo_c} — {motivo}</div>
-                            <div style="font-size:12px;color:#444;margin-top:3px">{evol_c}</div>
-                            {f'<div style="font-size:11px;color:#666;margin-top:2px">🔧 {proc_c}</div>' if proc_c else ''}
-                            <div style="margin-top:4px">
-                                <span class="badge {'b-verde' if resp_c=='Buena' else 'b-naranja' if resp_c=='Regular' else 'b-gris'}">{resp_c}</span>
+                            st.plotly_chart(fig_sv, use_container_width=True)
+                    except: pass
+    
+                    # ── Gráfica progresión especialidad específica ────
+                    try:
+                        if esp_pac in ["Odontología","Odontopediatría","Ortodoncia"]:
+                            h_hig = h[h["Higiene Oral"] != ""].copy()
+                            if len(h_hig) >= 2:
+                                orden = {"Mala":1,"Regular":2,"Buena":3}
+                                h_hig["Hig_num"] = h_hig["Higiene Oral"].map(orden)
+                                h_hig = h_hig.dropna(subset=["Hig_num","Fecha_dt"])
+                                st.markdown("#### 🦷 Evolución de higiene oral")
+                                fig_hig = px.line(
+                                    h_hig, x="Fecha_dt", y="Hig_num",
+                                    markers=True,
+                                    labels={"Fecha_dt":"Fecha","Hig_num":"Nivel"},
+                                    color_discrete_sequence=["#1A7A3C"]
+                                )
+                                fig_hig.update_traces(line=dict(width=3), marker=dict(size=8))
+                                fig_hig.update_layout(
+                                    height=220, margin=dict(l=10,r=10,t=10,b=10),
+                                    paper_bgcolor="rgba(0,0,0,0)",
+                                    plot_bgcolor="rgba(0,0,0,0)",
+                                    yaxis=dict(tickvals=[1,2,3],
+                                               ticktext=["Mala","Regular","Buena"],
+                                               tickfont=dict(color="#333")),
+                                    xaxis=dict(tickfont=dict(color="#333")),
+                                    font=dict(color="#222")
+                                )
+                                st.plotly_chart(fig_hig, use_container_width=True)
+    
+                        if esp_pac == "Fonoaudiología":
+                            h_hab = h[h["Estado Habla"] != ""].copy()
+                            if len(h_hab) >= 2:
+                                orden = {"Severa":1,"Moderada":2,"Leve":3,
+                                         "Sin hipernasalidad":4}
+                                h_hab["Hab_num"] = h_hab["Estado Habla"].map(orden)
+                                h_hab = h_hab.dropna(subset=["Hab_num","Fecha_dt"])
+                                st.markdown("#### 🗣️ Evolución de hipernasalidad")
+                                fig_hab = px.line(
+                                    h_hab, x="Fecha_dt", y="Hab_num",
+                                    markers=True,
+                                    labels={"Fecha_dt":"Fecha","Hab_num":"Nivel"},
+                                    color_discrete_sequence=["#6A0DAD"]
+                                )
+                                fig_hab.update_traces(line=dict(width=3), marker=dict(size=8))
+                                fig_hab.update_layout(
+                                    height=220, margin=dict(l=10,r=10,t=10,b=10),
+                                    paper_bgcolor="rgba(0,0,0,0)",
+                                    plot_bgcolor="rgba(0,0,0,0)",
+                                    yaxis=dict(tickvals=[1,2,3,4],
+                                               ticktext=["Severa","Moderada","Leve","Sin hipernasalidad"],
+                                               tickfont=dict(color="#333")),
+                                    xaxis=dict(tickfont=dict(color="#333")),
+                                    font=dict(color="#222")
+                                )
+                                st.plotly_chart(fig_hab, use_container_width=True)
+                    except: pass
+    
+                    # ── Respuesta al tratamiento por consulta ─────────
+                    try:
+                        h_resp = h[h["Respuesta Tx"] != ""].copy()
+                        if len(h_resp) >= 2:
+                            orden_r = {"Buena":3,"Regular":2,"No evaluada":1,
+                                       "Sin respuesta":0,"Deterioro":-1}
+                            h_resp["Resp_num"] = h_resp["Respuesta Tx"].map(orden_r)
+                            h_resp = h_resp.dropna(subset=["Resp_num","Fecha_dt"])
+                            st.markdown("#### ✅ Respuesta al tratamiento por consulta")
+                            colores_resp = {3:"#1A7A3C",2:"#E07B00",1:"#888",0:"#C62828",-1:"#7F0000"}
+                            bar_colors = [colores_resp.get(int(r),  "#888")
+                                          for r in h_resp["Resp_num"]]
+                            fig_resp = go.Figure(go.Bar(
+                                x=[str(f)[:10] for f in h_resp["Fecha_dt"]],
+                                y=h_resp["Resp_num"],
+                                marker_color=bar_colors,
+                                text=h_resp["Respuesta Tx"],
+                                textposition="outside",
+                                textfont=dict(color="#222", size=11),
+                            ))
+                            fig_resp.update_layout(
+                                height=240, margin=dict(l=10,r=10,t=10,b=30),
+                                paper_bgcolor="rgba(0,0,0,0)",
+                                plot_bgcolor="rgba(0,0,0,0)",
+                                yaxis=dict(tickvals=[-1,0,1,2,3],
+                                           ticktext=["Deterioro","Sin resp.","No eval.","Regular","Buena"],
+                                           showgrid=True, gridcolor="#eee",
+                                           tickfont=dict(color="#333")),
+                                xaxis=dict(tickfont=dict(color="#333")),
+                                font=dict(color="#222"), showlegend=False
+                            )
+                            st.plotly_chart(fig_resp, use_container_width=True)
+                    except: pass
+    
+                    # ── Línea de tiempo de consultas ──────────────────
+                    st.markdown("#### 📅 Línea de tiempo de consultas")
+                    for _, row in h.iterrows():
+                        fecha_c = str(row.get("Fecha","")).strip()
+                        hora_c  = str(row.get("Hora","")).strip()
+                        tipo_c  = str(row.get("Tipo Consulta","")).strip()
+                        motivo  = str(row.get("Motivo","")).strip()
+                        proc_c  = str(row.get("Procedimiento","")).strip()
+                        evol_c  = str(row.get("Evolucion","")).strip()
+                        resp_c  = str(row.get("Respuesta Tx","")).strip()
+                        n_c     = str(row.get("N Consulta","")).strip()
+    
+                        color_tl = {"Primera vez":"#0B3D91","Control":"#1A7A3C",
+                                    "Postquirúrgico":"#E07B00","Urgencias":"#C62828"}.get(tipo_c,"#555")
+                        st.markdown(f"""
+                        <div class="tl">
+                            <div class="tdot" style="background:{color_tl}"></div>
+                            <div class="tbox">
+                                <div class="tdate">📅 {fecha_c} {f'· ⏰ {hora_c}' if hora_c else ''} · Consulta #{n_c}</div>
+                                <div class="ttit" style="color:{color_tl}">
+                                    {tipo_c} — {motivo}</div>
+                                <div style="font-size:12px;color:#444;margin-top:3px">{evol_c}</div>
+                                {f'<div style="font-size:11px;color:#666;margin-top:2px">🔧 {proc_c}</div>' if proc_c else ''}
+                                <div style="margin-top:4px">
+                                    <span class="badge {'b-verde' if resp_c=='Buena' else 'b-naranja' if resp_c=='Regular' else 'b-gris'}">{resp_c}</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>""", unsafe_allow_html=True)
+                        </div>""", unsafe_allow_html=True)
