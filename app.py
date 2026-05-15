@@ -318,49 +318,50 @@ with col_detalle:
 
         # ── TAB 1: Datos Generales ────────────────────────────────
         with tab1:
-            ca,cb = st.columns(2)
-            with ca:
-                st.markdown('<div class="sh b">🧍 Identificación</div><div class="sb">',
-                            unsafe_allow_html=True)
-                for lbl,campo in [
-                    ("Nombre completo","Nombre Paciente"),("N° Identificación","N° Identificación"),
-                    ("Tipo ID","Tipo ID"),("Fecha nacimiento","Fecha Nac."),
-                    ("Edad","Edad"),("Grupo etario","Grupo Etario"),
-                    ("Sexo","Sexo"),("Estado civil","Estado Civil"),
-                    ("Ocupación","Ocupación"),("Escolaridad","Escolaridad"),
-                    ("Ciudad","Ciudad"),("Teléfono","Teléfono"),
-                ]:
-                    val=v(p,campo); e="e" if val=="—" else ""
-                    st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+            with st.container(height=550, border=False):
+                ca,cb = st.columns(2)
+                with ca:
+                    st.markdown('<div class="sh b">🧍 Identificación</div><div class="sb">',
                                 unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-            with cb:
-                st.markdown('<div class="sh v">👨‍👩‍👧 Acudiente & Seguro</div><div class="sb">',
-                            unsafe_allow_html=True)
-                for lbl,campo in [
-                    ("Acudiente","Acudiente"),("Parentesco","Parentesco"),
-                    ("EPS / Aseguradora","EPS / Aseguradora"),
-                    ("Tipo afiliación","Tipo Afiliación"),("Régimen","Régimen"),
-                ]:
-                    val=v(p,campo); e="e" if val=="—" else ""
-                    st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                    for lbl,campo in [
+                        ("Nombre completo","Nombre Paciente"),("N° Identificación","N° Identificación"),
+                        ("Tipo ID","Tipo ID"),("Fecha nacimiento","Fecha Nac."),
+                        ("Edad","Edad"),("Grupo etario","Grupo Etario"),
+                        ("Sexo","Sexo"),("Estado civil","Estado Civil"),
+                        ("Ocupación","Ocupación"),("Escolaridad","Escolaridad"),
+                        ("Ciudad","Ciudad"),("Teléfono","Teléfono"),
+                    ]:
+                        val=v(p,campo); e="e" if val=="—" else ""
+                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                                    unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with cb:
+                    st.markdown('<div class="sh v">👨‍👩‍👧 Acudiente & Seguro</div><div class="sb">',
                                 unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-                st.markdown('<div class="sh m">🔬 Antecedentes</div><div class="sb">',
-                            unsafe_allow_html=True)
-                for lbl,campo in [
-                    ("Personales LPH","Antec. Personales LPH"),
-                    ("Familiares","Antec. Familiares"),
-                    ("Quirúrgicos","Antec. Quirúrgicos"),
-                    ("Alergias","Alergias"),
-                    ("Toxicológicos","Antec. Toxicológicos"),
-                    ("Gineco-obstétrico","F. Obstétrica"),
-                ]:
-                    val=v(p,campo); e="e" if val=="—" else ""
-                    st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                    for lbl,campo in [
+                        ("Acudiente","Acudiente"),("Parentesco","Parentesco"),
+                        ("EPS / Aseguradora","EPS / Aseguradora"),
+                        ("Tipo afiliación","Tipo Afiliación"),("Régimen","Régimen"),
+                    ]:
+                        val=v(p,campo); e="e" if val=="—" else ""
+                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                                    unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+    
+                    st.markdown('<div class="sh m">🔬 Antecedentes</div><div class="sb">',
                                 unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
+                    for lbl,campo in [
+                        ("Personales LPH","Antec. Personales LPH"),
+                        ("Familiares","Antec. Familiares"),
+                        ("Quirúrgicos","Antec. Quirúrgicos"),
+                        ("Alergias","Alergias"),
+                        ("Toxicológicos","Antec. Toxicológicos"),
+                        ("Gineco-obstétrico","F. Obstétrica"),
+                    ]:
+                        val=v(p,campo); e="e" if val=="—" else ""
+                        st.markdown(f'<div class="dl">{lbl}</div><div class="dv {e}">{val}</div>',
+                                    unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
 
         # ── TAB 2: Clínico ────────────────────────────────────────
         with tab2:
