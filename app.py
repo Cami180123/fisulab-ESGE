@@ -150,12 +150,12 @@ section[data-testid="stSidebar"] span { color: #e8f4ff !important; }
 @st.cache_data
 def cargar():
     base = Path(__file__).parent
-    df = pd.read_excel(base / "Fisulab_BD_500pacientes_v2.xlsx",
+    df = pd.read_excel(base / "Fisulab_BD_500pacientes_v3.xlsx",
                        sheet_name="Pacientes_Fisulab", header=1)
     df.columns = df.columns.str.strip()
     df = df.fillna("")
 
-    hist = pd.read_excel(base / "Fisulab_Historial_Consultas.xlsx", header=0)
+    hist = pd.read_excel(base / "Fisulab_Historial_Consultas_v3.xlsx", header=0)
     hist.columns = hist.columns.str.strip()
     hist = hist.fillna("")
     return df, hist
