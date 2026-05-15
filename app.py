@@ -151,7 +151,7 @@ section[data-testid="stSidebar"] span { color: #e8f4ff !important; }
 def cargar():
     base = Path(__file__).parent
     df = pd.read_excel(base / "Fisulab_BD_500pacientes_v3.xlsx",
-                       sheet_name="Pacientes_Fisulab", header=1)
+                       sheet_name="Pacientes_Fisulab", header=0)
     df.columns = df.columns.str.strip()
     df = df.fillna("")
 
